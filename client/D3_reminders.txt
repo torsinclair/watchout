@@ -1,0 +1,92 @@
+Meta-library for creating visualizations
+Binds data to DOM nodes
+Interact with data rather than DOM to drive visualizations
+
+Select target nodes on our page to identify nodes that we want to add to our page
+
+** Bind data to selected nodes **
+
+Add and remove new nodes to our page, as needed
+
+** Drive visualizations via D3 method interfaces and data binding **
+
+jQuery
+$(div);
+
+versus
+
+d3
+d3.selectAll("div")
+  
+  .data([5, 30, 90]) --> binds the data array to the div elements (must match number of divs)
+
+  --> style takes two arguments, key-value pairs set height
+  .style('height', function(d){
+    return d + 'px'
+  } );
+
+
+  --> the divs now have 
+  <div style="height: 30px;" class='topBox'></div> ...
+
+d3.selectAll('div')
+  .data(['red', 'green', 'blue'])
+
+  .style('background-colour', function(d){
+    return d;
+    });
+
+
+******WHEN WE DON'T HAVE THE ELEMENTS???*****
+
+d3.selectAll('div')
+  .data(['red', 'green', 'blue'])
+
+--> .enter()    ***** creates new nodes
+--> .append('div') **** append takes 1 arg. type of html element we want to create  
+
+  .style('background-color', function(d){
+  return d;
+  });
+
+
+******** but they will drop at the bottom of the document *****
+
+use...
+d3.select('body').selectAll('div') and same as above
+
+
+
+****** exit...
+
+d3.select('body').selectAll('div')
+  .data(['pink', 'teal'])
+  .style('background-color', function(d){
+  return d;
+  })
+  .exit()
+  .remove(); --> note the ';' when you are DONE
+
+
+****** transitions
+
+d3.select('body').selectAll('div')
+  .data(['pink', 'green'])
+  .transition() .duration(1500)
+  .style('background-color', function(d){
+  return d;
+  })
+  .exit()
+  .remove();
+
+
+
+selection = array of eelements pulled from the 
+
+General Update Pattern I
+
+
+General Update Pattern II
+
+
+General Update Pattern III ??
