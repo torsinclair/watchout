@@ -40,6 +40,7 @@ var moveEnemies = function (data) {
   circle // update selection: change attributes of each circle per data point
     .attr('cx', function(d) { return d.x; }) // cx: x coordinate of circle
     .attr('cy', function(d) { return d.y; }); // cy: y coordinate of circle
+
 };
 
 
@@ -56,27 +57,21 @@ var testData = [
 {'x': 0, 'y': 0}
 ];
 
-var randomizeAxis = function(arr){
-
-  arr.map(function(value){
-    return {value.x = Math.random() * 100
-  })
-}
+var randomizeAxis = function(arr) {
+  return arr.map(function(value) {
+    value.x = Math.random() * width; 
+    value.y = Math.random() * height;
+    return value;
+  });
+};
   
-moveEnemies(testData);
+moveEnemies(randomizeAxis(testData));
 
-var testData2 = [{'x': 81.0, 'y': 21.1}, {'x': 22.0, 'y': 92.5}];
-
-setTimeout(function() { moveEnemies(testData2); }, 1000);
 
 setInterval(function() {
-  moveEnemies
-
-  (d3.shuffle(alphabet)
-      .slice(0, Math.floor(Math.random() * 26))
-      .sort());
-
-
+  moveEnemies(randomizeAxis(testData));
 }, 1500);
+
+
 
 
