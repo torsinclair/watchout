@@ -81,7 +81,26 @@ d3.select('body').selectAll('div')
 
 
 
-selection = array of eelements pulled from the 
+Selections are a subclass of arrays: this subclass provides methods to manipulate selected elements such as setting attributes and styles
+selections INHERIT native array methods
+
+arrays of arrays of elements
+
+selection is an array of groups, and each group is an array of elements
+
+e.g...
+
+d3.select returns a selection with one group containing the selected element
+
+var selection = d3.select('body') = {selection, group, body}
+
+d3.selectAll returns a selection with one group and any number of elements
+
+d3.selectAll('h2') .... h2, h2, h2, h2 and so on
+
+
+
+
 
 General Update Pattern I
 
