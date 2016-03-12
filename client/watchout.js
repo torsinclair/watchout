@@ -43,9 +43,9 @@ var radius = 20;
 
 
 */
-var drag = d3.behavior.drag()
-    .origin(function(d) { return d; })
-    .on("drag", dragmove);
+
+/*
+
 
 canvas.append("circle")
     .attr("r", radius)
@@ -58,19 +58,25 @@ function dragmove(d) {
       .attr("cx", d.x = Math.max(radius, Math.min(width - radius, d3.event.x)))
       .attr("cy", d.y = Math.max(radius, Math.min(height - radius, d3.event.y)));
 }
+var drag = d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("drag", dragmove);
+*/
 
 var initializeShip = function (data) {
-  var ship = svg.selectAll('circle.ship');
+  var ship = svg.selectAll('circle.ship')
 
-      ship.enter().append('circle')
-      .attr('r', 20)
-      .att('class', 'ship');
+  .data(data);
+
+  ship.enter().append('circle')
+  .attr('r', 15)
+  .attr('class', 'ship');
 
   ship // update selection: change attributes of each circle per data point
     .attr('cx', function(d) { return d.x; }) // cx: x coordinate of circle
     .attr('cy', function(d) { return d.y; }); // cy: y coordinate of circle
 
-}
+};
 
 var moveEnemies = function (data) {
 
@@ -78,7 +84,7 @@ var moveEnemies = function (data) {
     // in subsequent calls, returns the circle elements in the SVG
   .data(data); // joins selection with array of data from input
 
-  circle.exit().remove(); // exit selection = the DOM nodes that have no data elements; these are removed
+  // circle.exit().remove(); // exit selection = the DOM nodes that have no data elements; these are removed
 
   circle.enter().append('circle') // enter selection = placeholder DOM nodes for data elements that
     // have no DOM nodes; append a circle for each one
@@ -92,8 +98,6 @@ var moveEnemies = function (data) {
     .attr('cy', function(d) { return d.y; }); // cy: y coordinate of circle
 
 };
-
-
 
 var shipData = [
 {'x': 0, 'y': 0}
@@ -130,6 +134,8 @@ var randomizeAxis = function(arr) {
     return value;
   });
 };
+
+initializeShip(randomizeAxis(shipData));
   
 // invoke enemies  
 moveEnemies(randomizeAxis(testData));
