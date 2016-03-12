@@ -34,15 +34,18 @@ var canvas = d3.select('body').selectAll('svg');
 
 var radius = 20;
 
-var drag = d3.behavior.drag()
-    .origin(function(d) { return d; })
-    .on("drag", dragmove);
 
 // var svg = d3.select("body").append("div").selectAll("svg")
 //     .data(d3.range(16).map(function() { return {x: width / 2, y: height / 2}; }))
 //   .enter().append("svg")
 //     .attr("width", width)
 //     .attr("height", height);
+
+
+*/
+var drag = d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("drag", dragmove);
 
 canvas.append("circle")
     .attr("r", radius)
@@ -56,7 +59,18 @@ function dragmove(d) {
       .attr("cy", d.y = Math.max(radius, Math.min(height - radius, d3.event.y)));
 }
 
-*/
+var initializeShip = function (data) {
+  var ship = svg.selectAll('circle.ship');
+
+      ship.enter().append('circle')
+      .attr('r', 20)
+      .att('class', 'ship');
+
+  ship // update selection: change attributes of each circle per data point
+    .attr('cx', function(d) { return d.x; }) // cx: x coordinate of circle
+    .attr('cy', function(d) { return d.y; }); // cy: y coordinate of circle
+
+}
 
 var moveEnemies = function (data) {
 
@@ -78,6 +92,12 @@ var moveEnemies = function (data) {
     .attr('cy', function(d) { return d.y; }); // cy: y coordinate of circle
 
 };
+
+
+
+var shipData = [
+{'x': 0, 'y': 0}
+];
 
 
 var testData = [
