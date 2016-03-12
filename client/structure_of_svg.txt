@@ -1,0 +1,8 @@
+structure of SVG:
+  - use one g element to contain all enemies
+    -  enemies are circle elements
+
+  - use another g element to contain draggable ship
+     - ship is a path element
+
+
