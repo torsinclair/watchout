@@ -16,6 +16,11 @@
 
 // modified example from: https://bost.ocks.org/mike/join/
 
+// var svg = d3.select("body").append("div").selectAll("svg")
+//     .data(d3.range(16).map(function() { return {x: width / 2, y: height / 2}; }))
+//   .enter().append("svg")
+//     .attr("width", width)
+//     .attr("height", height);
 
 var width = 700;
 var height = 450;
@@ -23,28 +28,48 @@ var height = 450;
 var svg = d3.select('.board').insert('svg', '.mouse')
   .attr('width', width)
   .attr('height', height);
- 
-// add an svg circle to represent the player's 'ship'
 
+/*
+var canvas = d3.select('body').selectAll('svg');  
 
+var radius = 20;
 
-// make the ship respond to click + drag
+var drag = d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("drag", dragmove);
 
+// var svg = d3.select("body").append("div").selectAll("svg")
+//     .data(d3.range(16).map(function() { return {x: width / 2, y: height / 2}; }))
+//   .enter().append("svg")
+//     .attr("width", width)
+//     .attr("height", height);
+
+canvas.append("circle")
+    .attr("r", radius)
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .call(drag);
+
+function dragmove(d) {
+  d3.select(this)
+      .attr("cx", d.x = Math.max(radius, Math.min(width - radius, d3.event.x)))
+      .attr("cy", d.y = Math.max(radius, Math.min(height - radius, d3.event.y)));
+}
+
+*/
 
 var moveEnemies = function (data) {
 
-  var circle = svg.selectAll('circle') // returns a new empty selection the first time, since SVG is emtpy in HTML
+  var circle = svg.selectAll('circle.enemies') // returns a new empty selection the first time, since SVG is emtpy in HTML
     // in subsequent calls, returns the circle elements in the SVG
   .data(data); // joins selection with array of data from input
-
-  // circle.transition();
-
 
   circle.exit().remove(); // exit selection = the DOM nodes that have no data elements; these are removed
 
   circle.enter().append('circle') // enter selection = placeholder DOM nodes for data elements that
     // have no DOM nodes; append a circle for each one
-    .attr('r', 10); // set attributes for each new circle
+    .attr('r', 10) // set attributes for each new circle
+    .attr('class', 'enemies');
 
   circle // update selection: change attributes of each circle per data point
     .transition()
