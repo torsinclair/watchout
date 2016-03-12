@@ -12,24 +12,33 @@
 // launchCircles();
 
 
-var width = 700;
-var height = 450;
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
 
 
 // modified example from: https://bost.ocks.org/mike/join/
 
-var svg = d3.select('svg');
+
+var width = 700;
+var height = 450;
+
+var svg = d3.select('.board').insert('svg', '.mouse')
+  .attr('width', width)
+  .attr('height', height);
+ 
+// add an svg circle to represent the player's 'ship'
+
+
+
+// make the ship respond to click + drag
+
 
 var moveEnemies = function (data) {
 
   var circle = svg.selectAll('circle') // returns a new empty selection the first time, since SVG is emtpy in HTML
     // in subsequent calls, returns the circle elements in the SVG
-    .data(data); // joins selection with array of data from input
+  .data(data); // joins selection with array of data from input
+
+  // circle.transition();
+
 
   circle.exit().remove(); // exit selection = the DOM nodes that have no data elements; these are removed
 
@@ -38,6 +47,8 @@ var moveEnemies = function (data) {
     .attr('r', 10); // set attributes for each new circle
 
   circle // update selection: change attributes of each circle per data point
+    .transition()
+    .duration(1000)
     .attr('cx', function(d) { return d.x; }) // cx: x coordinate of circle
     .attr('cy', function(d) { return d.y; }); // cy: y coordinate of circle
 
@@ -45,6 +56,16 @@ var moveEnemies = function (data) {
 
 
 var testData = [
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
+{'x': 0, 'y': 0},
 {'x': 0, 'y': 0},
 {'x': 0, 'y': 0},
 {'x': 0, 'y': 0},
@@ -65,7 +86,17 @@ var randomizeAxis = function(arr) {
   });
 };
   
+// invoke enemies  
 moveEnemies(randomizeAxis(testData));
+
+/*
+d3.select('svg').selectAll('circle')
+  .data(randomizeAxis(testData))
+  .transition() .duration(1500);
+*/
+
+//.each('end', moveEnemies)
+
 
 
 setInterval(function() {
