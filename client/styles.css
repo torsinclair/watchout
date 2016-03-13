@@ -10,57 +10,34 @@ body{
   line-height: 18px;
   color: #333333;
 }
-
-div {
-  display: block;
-}
-
-.container {
-  position: relative;
-  box-shadow: 0px 0px 10px rgba(0,0,0,1);
-  width: 700px;
-  background: white;
-  padding: 40px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.scoreboard {
-  padding: 10px;
+iframe {
   position: absolute;
-  top: 40px;
-  right: 40px;
-  background: #ddd;
-  text-align: right;
+  z-index: 1;
+}
+.mouse {
+  position: absolute;
+  background-color: orange;
+}
+.astroid {
+  background-image: url('asteroid.png');
+  background-size: 100% 100%;
+  position: absolute;
+}
+.vis {
+  background-color: black;
+}
+.scoreboard {
+  width: 250px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
   border-radius: 3px;
 }
-
-#scores span {
-  display: inline-block;
-  width: 50px;
-}
-
-.rule line {
-  stroke: #eee;
-  shape-rendering: crispEdges;
-}
-
-.area {
-  fill: lightsteelblue;
-}
-
-.line, circle.area {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-circle.area {
-  fill: #fff;
-}
-
-.ship {
-  fill: orange;
+.scoreboard div {
+  line-height: 33px;
+  font-size: 25px;
+  float: right;
 }
